@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct SettingsView: View {
     @EnvironmentObject var vm: BotViewModel
