@@ -3,7 +3,7 @@ import SwiftUI
 
 // MARK: - API Response Models
 
-struct BotMetric: Codable, Hashable {
+struct BotMetric: Codable, Hashable, Sendable {
     let id: Int
     let botId: Int
     let equity: Double
@@ -28,7 +28,7 @@ struct BotMetric: Codable, Hashable {
     }
 }
 
-struct BotModel: Codable, Identifiable, Hashable {
+struct BotModel: Codable, Identifiable, Hashable, Sendable {
     let id: Int
     let name: String
     let symbol: String
@@ -87,7 +87,7 @@ enum BotStatusType: String {
     }
 }
 
-struct TradeModel: Codable, Identifiable {
+struct TradeModel: Codable, Identifiable, Sendable {
     let id: Int
     let botId: Int
     let side: String
@@ -105,7 +105,7 @@ struct TradeModel: Codable, Identifiable {
     var isBuy: Bool { side == "buy" }
 }
 
-struct DecisionModel: Codable, Identifiable {
+struct DecisionModel: Codable, Identifiable, Sendable {
     let id: Int
     let botId: Int
     let action: String
@@ -120,7 +120,7 @@ struct DecisionModel: Codable, Identifiable {
     }
 }
 
-struct DashboardData: Codable {
+struct DashboardData: Codable, Sendable {
     let totalBots: Int
     let activeBots: Int
     let totalEquity: Double
@@ -142,7 +142,7 @@ struct DashboardData: Codable {
     }
 }
 
-struct BacktestResult: Codable {
+struct BacktestResult: Codable, Sendable {
     let botId: Int
     let tradesCount: Int
     let finalEquity: Double
@@ -164,7 +164,7 @@ struct BacktestResult: Codable {
     }
 }
 
-struct AnalyzeResult: Codable {
+struct AnalyzeResult: Codable, Sendable {
     let botId: Int
     let action: String
     let reasoning: String
@@ -176,7 +176,7 @@ struct AnalyzeResult: Codable {
     }
 }
 
-struct LogEntry: Identifiable {
+struct LogEntry: Identifiable, Sendable {
     let id = UUID()
     let botId: Int
     let message: String
@@ -185,7 +185,7 @@ struct LogEntry: Identifiable {
 
 // MARK: - AnyCodableValue for flexible JSON
 
-enum AnyCodableValue: Codable, Hashable {
+enum AnyCodableValue: Codable, Hashable, Sendable {
     case string(String)
     case double(Double)
     case int(Int)

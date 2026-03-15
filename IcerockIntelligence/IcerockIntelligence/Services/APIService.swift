@@ -65,13 +65,13 @@ final class APIService: Sendable {
 
     // MARK: - HTTP
 
-    private func get<T: Decodable & Sendable>(_ path: String) async throws -> T {
+    private func get<T: Decodable>(_ path: String) async throws -> T {
         let url = URL(string: baseURL + path)!
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode(T.self, from: data)
     }
 
-    private func post<T: Decodable & Sendable>(_ path: String, body: [String: Any]) async throws -> T {
+    private func post<T: Decodable>(_ path: String, body: [String: Any]) async throws -> T {
         let url = URL(string: baseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -83,7 +83,7 @@ final class APIService: Sendable {
         return try JSONDecoder().decode(T.self, from: data)
     }
 
-    private func delete<T: Decodable & Sendable>(_ path: String) async throws -> T {
+    private func delete<T: Decodable>(_ path: String) async throws -> T {
         let url = URL(string: baseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
