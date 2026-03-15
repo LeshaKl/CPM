@@ -1,4 +1,4 @@
-# CPM
+# CPM :)
 C+-
 HSE VibeHACK March 2026
 
