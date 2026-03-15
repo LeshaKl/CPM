@@ -19,9 +19,6 @@ struct SettingsView: View {
                                 .font(.system(size: 13, design: .monospaced))
                                 .foregroundColor(.appAccent)
                                 .tint(.appAccent)
-                                .onChange(of: apiBaseURL) { _, newValue in
-                                    Task { await APIService.shared.setBaseURL(newValue) }
-                                }
                         }
 
                         Button {

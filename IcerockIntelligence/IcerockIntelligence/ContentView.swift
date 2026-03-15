@@ -1,4 +1,7 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 struct ContentView: View {
     @EnvironmentObject var vm: BotViewModel
@@ -28,24 +31,21 @@ struct ContentView: View {
             .tint(Color.appAccent)
             .onAppear { configureTabBar() }
             #else
-            NavigationSplitView {
-                List(selection: $vm.selectedTab) {
-                    Label("Главная", systemImage: "chart.pie.fill").tag(0)
-                    Label("Боты", systemImage: "cpu").tag(1)
-                    Label("Анализ", systemImage: "chart.bar.fill").tag(2)
-                    Label("Настройки", systemImage: "gearshape.fill").tag(3)
-                }
-                .listStyle(.sidebar)
-                .navigationTitle("Icerock")
-            } detail: {
-                switch vm.selectedTab {
-                case 0: HomeView()
-                case 1: BotsListView()
-                case 2: AnalyticsView()
-                case 3: SettingsView()
-                default: HomeView()
-                }
+            TabView(selection: $vm.selectedTab) {
+                HomeView()
+                    .tabItem { Label("Главная", systemImage: "chart.pie.fill") }
+                    .tag(0)
+                BotsListView()
+                    .tabItem { Label("Боты", systemImage: "cpu") }
+                    .tag(1)
+                AnalyticsView()
+                    .tabItem { Label("Анализ", systemImage: "chart.bar.fill") }
+                    .tag(2)
+                SettingsView()
+                    .tabItem { Label("Настройки", systemImage: "gearshape.fill") }
+                    .tag(3)
             }
+            .tint(Color.appAccent)
             #endif
         }
     }
